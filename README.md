@@ -9,10 +9,11 @@ It exposes two tools:
 
 - `context_info` reports the current context usage, including token count and
   available context-window details.
-- `compact_context` triggers compaction of the current session context. After
-  compaction completes successfully, the extension sends a `Please continue`
-  user message so the agent resumes working with the compacted context without
-  waiting for the user.
+- `compact_context` triggers compaction of the current session context. It
+  requires a `continueMessage` parameter: after compaction completes
+  successfully, that string is sent as a user message (e.g. `Please continue`)
+  so the agent resumes working with the compacted context without waiting for
+  the user.
 
 Together, these tools let agents inspect their own context usage and compact it
 on demand, without waiting for auto-compaction or requiring the user to run
