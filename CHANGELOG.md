@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing yet.
+### Added
+
+- `compact_context` now accepts a required `continueMessage` string. After
+  compaction completes successfully, that message is sent as a user message so
+  the agent resumes with the compacted context. The message should describe
+  what the agent should do next.
+
+### Changed
+
+- Tool and parameter descriptions clarify that `continueMessage` is an
+  instruction for post-compaction work.
 
 ## [0.1.1] - 2026-05-10
 
