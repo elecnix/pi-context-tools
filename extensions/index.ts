@@ -19,6 +19,10 @@ export default function (pi: ExtensionAPI) {
               "info",
             );
           }
+          // Compaction has finished and the agent is idle again, so this user
+          // message is accepted immediately and triggers a new turn with the
+          // compacted context.
+          pi.sendUserMessage("Please continue");
         },
         onError: (error) => {
           if (ctx.hasUI) {
