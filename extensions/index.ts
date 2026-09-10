@@ -97,11 +97,11 @@ export default function (pi: ExtensionAPI) {
     name: "compact_context",
     label: "Compact context",
     description:
-      "Trigger context compaction. Useful for long-sessions or when orchestrating subagents/multi-step workflows to keep context size low. After compaction completes, the message in continueMessage is sent as a user message to resume the agent.",
+      "Trigger context compaction. Useful for long-sessions or when orchestrating subagents/multi-step workflows to keep context size low. The required continueMessage is sent as a user message after compaction completes, so it should describe what the agent should do next with the compacted context, not just \"continue\".",
     parameters: Type.Object({
       continueMessage: Type.String({
         description:
-          'Message to send as a user message after compaction completes, e.g. "Please continue".',
+          "Instruction for what the agent should do after compaction, sent as a user message once compaction completes.",
       }),
     }),
     async execute(_toolCallId, params) {
