@@ -2,14 +2,15 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
 
 export default function (pi: ExtensionAPI) {
-  let compactAfterTurn = false;
+  let compactAfterTurn: string | undefined = undefined;
 
   pi.on("agent_end", (_event, ctx) => {
     if (!compactAfterTurn) {
       return;
     }
 
-    compactAfterTurn = false;
+    const continueMessage = compactAfterTurn;
+    compactAfterTurn = undefined;
     setTimeout(() => {
       ctx.compact({
         onComplete: () => {
@@ -19,6 +20,10 @@ export default function (pi: ExtensionAPI) {
               "info",
             );
           }
+          // Compaction has finished and the agent is idle again, so this user
+          // message is accepted immediately and triggers a new turn with the
+          // compacted context.
+          pi.sendUserMessage(continueMessage);
         },
         onError: (error) => {
           if (ctx.hasUI) {
@@ -92,10 +97,15 @@ export default function (pi: ExtensionAPI) {
     name: "compact_context",
     label: "Compact context",
     description:
-      "Trigger context compaction. Useful for long-sessions or when orchestrating subagents/multi-step workflows to keep context size low.",
-    parameters: Type.Object({}),
-    async execute() {
-      compactAfterTurn = true;
+      "Trigger context compaction. Useful for long-sessions or when orchestrating subagents/multi-step workflows to keep context size low. The required continueMessage is sent as a user message after compaction completes, so it should describe what the agent should do next with the compacted context.",
+    parameters: Type.Object({
+      continueMessage: Type.String({
+        description:
+          "Instruction for what the agent should do after compaction, sent as a user message once compaction completes.",
+      }),
+    }),
+    async execute(_toolCallId, params) {
+      compactAfterTurn = params.continueMessage;
 
       return {
         content: [
