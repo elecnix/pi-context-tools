@@ -9,8 +9,9 @@
     "outDir": "dist",
     "rootDir": ".",
     "declaration": true,
-    "noEmit": true
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["extensions/**/*.ts"],
+  "include": ["extensions/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
