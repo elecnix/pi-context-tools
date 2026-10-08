@@ -5,6 +5,15 @@ All changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0 (2026-10-08)
+
+
+### Features
+
+* Add context_info tool ([a04cb87](https://github.com/elecnix/pi-context-tools/commit/a04cb8763c9ba56eaea297fc23cbb18af4e57186))
+* make continueMessage a required compact_context parameter ([41026c0](https://github.com/elecnix/pi-context-tools/commit/41026c0bd6db61dc89032148dfe9db5331ea9fd0))
+* send "Please continue" after compact_context compaction ([9927c6c](https://github.com/elecnix/pi-context-tools/commit/9927c6c126b389b874a3778a7888d09ead7c86f0))
+
 ## [Unreleased]
 
 ### Added
